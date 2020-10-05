@@ -1,1 +1,8 @@
-aws ec2 describe-instances --instance-id <INSTANCE ID> #Describe all information of EC2 instance
+# 1. Describe all information of EC2 instance
+aws ec2 describe-instances --instance-id <INSTANCE ID>
+
+# 2. Describe information of EC2 instance using filters
+aws ec2 describe-instances --filters Name=instance-type,Values=t2.micro
+
+# 3. Describe inforamtion of EC2 instance like AWS Console
+aws ec2 describe-instances --query 'Reservations[].Instances[].[Tags[?Key==`Name`].Value[] | [0], Placement.AvailabilityZone,InstanceType,State.Name]' --output text
